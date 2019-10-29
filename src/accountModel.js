@@ -46,7 +46,7 @@ const accountModel = {
         `, {
             $email: email,
             $fund: fundName
-        });
+        }).amount;
 
         if (fundAmount >= amount) {
             db.run(`
