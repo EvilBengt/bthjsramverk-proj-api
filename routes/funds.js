@@ -1,11 +1,11 @@
 const express = require("express");
 const jwtModel = require("../src/jwtModel");
-const tradingModel = require("../src/tradingModel");
+const fundsModel = require("../src/fundsModel");
 
 const router = express.Router();
 
 router.get("/weeks", (req, res) => {
-    tradingModel.weeks((rows) => {
+    fundsModel.weeks((rows) => {
         res.json({
             data: {
                 weeks: rows

@@ -2,6 +2,7 @@ const express    = require("express");
 const bodyParser = require("body-parser");
 const cors       = require("cors")
 const morgan     = require("morgan");
+const db         = require("./src/db");
 
 const index = require("./routes/index");
 
@@ -54,6 +55,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-const server = app.listen(port, () => console.log(`Listening on ${port}`));
-
-module.exports = server;
+db.init().then(() => {
+    app.listen(port, () => console.log(`Listening on ${port}`));
+});

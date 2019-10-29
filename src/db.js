@@ -1,15 +1,16 @@
-const dbAccess = require("../db/database");
+const Database = require("sqlite-async");
+const DSN = "../db/db.sqlite";
+
+let instance = undefined;
 
 const db = {
-    run: (callback) => {
-        const connection = dbAccess.get();
-
-        const result = callback(connection)
-
-        connection.close();
-
-        return result;
+    init: async () => {
+        instance = await Database.open(DSN);
+    },
+    instance: () => instance,
+    close: () => {
+        instance.close();
     }
-}
+};
 
 module.exports = db;

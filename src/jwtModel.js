@@ -10,7 +10,7 @@ const jwtModel = {
     test: (req, res, next) => {
         const token = req.headers['x-access-token'];
 
-        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, _) => {
             if (err) {
                 res.status(401).json(
                     {
@@ -27,6 +27,9 @@ const jwtModel = {
                 next();
             }
         });
+    },
+    getEmail: (token) => {
+        return jwt.decode(token).email;
     }
 };
 
