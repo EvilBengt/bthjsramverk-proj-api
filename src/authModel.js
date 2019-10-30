@@ -1,38 +1,26 @@
-const connection = require("./db");
+const db = require("./db")
 const bcrypt = require("bcryptjs");
 const jwtModel = require("./jwtModel");
 
 const userModel = {
-    login: (login, password, callback) => {
-        connection.run((db) => {
-            db.get(`SELECT password FROM users WHERE name = $login OR email = $login`, {
-                $login: login
-            }, (err, row) => {
-                if (row && bcrypt.compareSync(password, row.password)) {
-                    callback(jwtModel.sign(login));
-                } else {
-                    callback(false);
-                }
-            });
+    login: async (email, password) => {
+        const row = await db.instance().get(`SELECT password FROM users WHERE email = $email`, {
+            $email: email
         });
+
+        if (row && bcrypt.compareSync(password, row.password)) {
+            return jwtModel.sign(email);
+        } else {
+            return false;
+        }
     },
-    register: (name, email, password, birthdate, callback) => {
-        connection.run((db) => {
-            db.run(`
-                INSERT INTO users (name, email, password, birthdate)
-                VALUES ($name, $email, $password, $birthdate)
-            `, {
-                $name: name,
-                $email: email,
-                $password: bcrypt.hashSync(password, 8),
-                $birthdate: birthdate
-            }, (err) => {
-                if (err) {
-                    callback(false);
-                } else {
-                    callback(true);
-                }
-            });
+    register: async (email, password) => {
+        await db.instance().run(`
+            INSERT INTO users (email, password)
+            VALUES ($email, $password)
+        `, {
+            $email: email,
+            $password: bcrypt.hashSync(password, 8),
         });
     }
 };
