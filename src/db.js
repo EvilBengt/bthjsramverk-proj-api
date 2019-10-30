@@ -5,7 +5,7 @@ let instance = undefined;
 
 const db = {
     init: async () => {
-        instance = await Database.open(path.join(__dirname,"../db/db.sqlite"));
+        instance = await Database.open(path.join(__dirname,"../db/bedswank.sqlite"));
     },
     instance: () => instance,
     close: () => {
