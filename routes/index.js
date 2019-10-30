@@ -6,7 +6,7 @@ const funds = require("./funds");
 const account = require("./account");
 const auth = require("./auth");
 
-router.use("/funds/", jwtModel.test, funds);
+router.use("/funds/", funds);
 
 router.use("/account/", jwtModel.test, account);
 
