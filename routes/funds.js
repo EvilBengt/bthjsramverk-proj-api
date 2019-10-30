@@ -1,17 +1,14 @@
 const express = require("express");
-const jwtModel = require("../src/jwtModel");
 const fundsModel = require("../src/fundsModel");
 
 const router = express.Router();
 
-router.get("/weeks", (req, res) => {
-    fundsModel.weeks((rows) => {
-        res.json({
-            data: {
-                weeks: rows
-            }
-        });
-    })
+router.get("/all", async (req, res) => {
+    res.json({
+        data: {
+            funds: await fundsModel.getAll()
+        }
+    });
 });
 
 module.exports = router;
