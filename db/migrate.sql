@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS "user_funds" (
 INSERT INTO "users" ("email","password","balance") VALUES ('test@example.com','$2a$08$uFnSpwvEUJvH78IpLUn3wOqw427Lit3d4onDtfVyxGWNgZ43qaJvW',2139.56812531572),
  ('hej@hej.hej','$2a$08$raRH50e20D5VuLSGe9Zfe.tmRWhy8mp/H.3luESEobl8/LZcTFOzS',100.0);
 INSERT INTO "funds" ("name","long_name","value","rate","variance") VALUES ('KTI','Kapitårtinvest',278.553244327563,1.001,0.9),
- ('ATS','Alletårtspar',49.6000000000001,1,0.2);
+ ('ATS','Alletårtspar',49.6000000000001,1.0003,0.2);
 INSERT INTO "user_funds" ("user","fund","amount") VALUES ('test@example.com','KTI',11.0),
  ('test@example.com','ATS',1.0);
 COMMIT;
