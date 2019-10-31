@@ -11,7 +11,7 @@ const accountModel = {
         return await db.instance().all(`
             SELECT name,
                    long_name,
-                   amount
+                   amount, value
               FROM user_funds
               LEFT JOIN funds
                 ON user_funds.fund = funds.name
