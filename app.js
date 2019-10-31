@@ -8,7 +8,7 @@ const index = require("./routes/index");
 
 const app = express();
 const devPort = 1337;
-const prodPort = 8333;
+const prodPort = 8444;
 const port = process.env.NODE_ENV === "production" ? prodPort : devPort;
 
 app.use(cors());
