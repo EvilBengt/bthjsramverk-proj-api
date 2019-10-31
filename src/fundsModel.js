@@ -15,10 +15,32 @@ const fundsModel = {
             $name: name
         });
     },
-    getValue: async (fundName) => {
-        return await db.get(`SELECT value FROM funds WHERE name = $name`, {
-            $name: fundName
+    updateAndGetValues: async () => {
+        const funds = await db.instance().all(`
+            SELECT name,
+                   value,
+                   rate, variance
+              FROM funds
+        `);
+        const updated = funds.map(fund => {
+            return {
+                name: fund.name,
+                value: fund.value * fund.rate + fund.variance * (Math.random() > 0.5 ? 1 : -1)
+            };
         });
+
+        updated.forEach(async fund => {
+            await db.instance().run(`
+                UPDATE funds
+                SET value = $newValue
+                WHERE name = $name
+            `, {
+                $newValue: fund.value,
+                $name: fund.name
+            });
+        });
+
+        return updated;
     }
 };
 
