@@ -1,14 +1,12 @@
 const express    = require("express");
-const http       = require("http");
 const bodyParser = require("body-parser");
 const cors       = require("cors")
 const morgan     = require("morgan");
-
-const index      = require("./routes/index");
 const db         = require("./src/db");
 
+const index = require("./routes/index");
+
 const app = express();
-const server = http.Server(app);
 const devPort = 1337;
 const prodPort = 8333;
 const port = process.env.NODE_ENV === "production" ? prodPort : devPort;
@@ -58,5 +56,5 @@ app.use((err, req, res, next) => {
 });
 
 db.init().then(() => {
-    server.listen(port);
+    app.listen(port, () => console.log(`Listening on ${port}`));
 });
