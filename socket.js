@@ -16,7 +16,8 @@ const io = require("socket.io")(server);
 
 io.origins([
     "https://proj-app.jsramverk.evilbengt.me:443",
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "http://192.168.2.163:3000"
 ]);
 
 setInterval(async () => {
@@ -26,5 +27,5 @@ setInterval(async () => {
 }, UPDATE_INTERVAL)
 
 db.init().then(() => {
-    server.listen(8300);
+    server.listen(8400);
 });
