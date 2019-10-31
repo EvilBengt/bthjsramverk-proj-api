@@ -7,8 +7,7 @@ const fundsModel = {
     get: async name => {
         return await db.instance().get(`
             SELECT name, long_name,
-                   value,
-                   rate, variance
+                   value
               FROM funds
              WHERE name = $name
         `, {
