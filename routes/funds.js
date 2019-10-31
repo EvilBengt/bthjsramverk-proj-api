@@ -11,4 +11,12 @@ router.get("/all", async (req, res) => {
     });
 });
 
+router.get("/fund/:name", async (req, res) => {
+    res.json({
+        data: {
+            fund: await fundsModel.get(req.params["name"])
+        }
+    });
+});
+
 module.exports = router;
