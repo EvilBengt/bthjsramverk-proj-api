@@ -84,8 +84,7 @@ const accountModel = {
                     $email: email,
                     $fund: fundName
                 });
-                await accountModel.deposit(totalCost, email);
-            } else if (fundAmount === amount) {
+            } else if (fundAmount == amount) {
                 await db.instance().run(`
                     DELETE FROM user_funds
                      WHERE user = $email
@@ -95,7 +94,7 @@ const accountModel = {
                     $fund: fundName
                 });
             }
-            await accountModel.deposit(fundValue, email);
+            await accountModel.deposit(totalCost, email);
         }
     }
 };
